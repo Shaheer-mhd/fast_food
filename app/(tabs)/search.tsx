@@ -1,5 +1,7 @@
 import CartButton from "@/components/CartButton";
+import Filter from "@/components/Filter";
 import MenuCard from "@/components/MenuCard";
+import SearchBar from "@/components/SearchBar";
 import { getCategories, getMenu } from "@/lib/appwrite";
 import useAppwrite from "@/lib/useAppwrite";
 import { MenuItem } from "@/type";
@@ -72,8 +74,18 @@ const search = () => {
               </View>
               <CartButton />
             </View>
-            <Text>SearchInput</Text>
-            <Text>Filter</Text>
+            <SearchBar />
+            <Filter
+              categories={
+                categories
+                  ? categories.map((cat: any) => ({
+                      ...cat,
+                      name: cat.name,
+                      description: cat.description,
+                    }))
+                  : []
+              }
+            />
           </View>
         )}
         ListEmptyComponent={() => !loading && <Text>Empty Array</Text>}
